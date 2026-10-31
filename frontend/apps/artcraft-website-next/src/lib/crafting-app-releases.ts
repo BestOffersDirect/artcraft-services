@@ -11,15 +11,15 @@ import type { CraftAppSlug } from "./crafting-apps";
 //
 // Release tags are `v<version>` and live at github.com/storytold/<slug>.
 
-export type CraftDesktopPlatform = "macOS" | "Windows" | "Linux";
+export type CraftDesktopPlatform = "macOS" | "Windows" | "Linux" | "FreeBSD";
 
 /** Order of the per-platform download buttons. */
-export const CRAFT_DESKTOP_PLATFORMS: CraftDesktopPlatform[] = ["macOS", "Windows", "Linux"];
+export const CRAFT_DESKTOP_PLATFORMS: CraftDesktopPlatform[] = ["macOS", "Windows", "Linux", "FreeBSD"];
 
 export type CraftReleaseAsset = {
   /** Asset filename; `{slug}` and `{version}` are filled in per app. */
   file: string;
-  /** Group in the full file list. "Other" holds the FreeBSD build, web build and checksums. */
+  /** Group in the full file list. "Other" holds the web build and checksums. */
   group: CraftDesktopPlatform | "Other";
   /** Short name, e.g. "Installer (x64)". */
   label: string;
@@ -178,12 +178,6 @@ export const CRAFT_RELEASE_ASSETS: readonly CraftReleaseAsset[] = [
     arch: "aarch64",
   },
   {
-    file: "{slug}-{version}-freebsd-x86_64.tar.gz",
-    group: "Other",
-    label: "FreeBSD (x86_64)",
-    description: "Plain binaries for FreeBSD 14.",
-  },
-  {
     file: "{slug}-web-{version}.zip",
     group: "Other",
     label: "Web build",
@@ -194,6 +188,14 @@ export const CRAFT_RELEASE_ASSETS: readonly CraftReleaseAsset[] = [
     group: "Other",
     label: "SHA-256 checksums",
     description: "Verify any download above.",
+  },
+  {
+    file: "{slug}-{version}-freebsd-x86_64.tar.gz",
+    group: "FreeBSD",
+    label: "FreeBSD (x86_64)",
+    description: "Plain binaries for FreeBSD 14.",
+    arch: "x86_64",
+    recommended: true,
   },
 ];
 
